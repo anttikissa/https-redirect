@@ -32,9 +32,20 @@ server.on('error', (err) => {
 
 function dropPrivileges() {
 	if (process.getuid() === 0) {
-		process.setgid('nobody');
+		try {
+			process.setgid('nogroup');
+		} catch (err) {
+			try {
+				process.setgid('nobody');
+			} catch (err) {
+				// whatever
+			}
+		}
 		process.setuid('nobody');
 	}
+
+	// To test:
+	//require('child_process').spawn('id').stdout.pipe(process.stdout);
 }
 
 server.on('listening', () => {
