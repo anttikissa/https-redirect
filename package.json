@@ -5,5 +5,8 @@
   "license": "MIT",
   "scripts": {
     "run": "sudo node index.js"
+  },
+  "devDependencies": {
+    "prettier": "^1.18.2"
   }
 }
