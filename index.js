@@ -9,6 +9,13 @@ function log(...args) {
 	console.log(...args)
 }
 
+process.on('SIGTERM', () => {
+	log('SIGTERM, exiting')
+	setTimeout(() => {
+		process.exit(0)
+	}, 1)
+})
+
 function answer(req, res) {
 	let host = req.headers.host.replace(/:\d+$/, '')
 	const location = `https://${host}${req.url}`
